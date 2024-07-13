@@ -1,28 +1,20 @@
 pipeline {
-    agent any
-
+    agent {label "linux"}
     stages {
         stage('Build') {
             steps {
-                    sh 'javac OlaUnicamp.java'
+                    sh """
+                docker build -t OlaUnicamp.java .
+                """
             }
         }
 
         stage('Run') {
             steps {
-
-                    sh "docker run java OlaUnicamp"
+                    sh """
+                docker run --rm OlaUnicamp.java
+                """
             }
         }
     }
-
-    post {
-        success {
-            echo 'Pipeline executado com sucesso!'
-        }
-        failure {
-            echo 'O pipeline falhou.'
-        }
-    }
 }
-
