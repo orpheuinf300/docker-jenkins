@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                     sh """
-                docker build OlaUnicamp.java .
+                docker build -t OlaUnicamp .
                 """
             }
         }
